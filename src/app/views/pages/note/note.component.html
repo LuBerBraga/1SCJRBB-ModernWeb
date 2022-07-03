@@ -3,4 +3,5 @@
   <p>{{noteProp.text}}</p>
   <span *ngIf="noteProp.urgent" class="material-icons" id="priority">priority_high</span>
   <span class="material-icons" (click)="confirmRemove()"> delete_forever </span>
+  <span class="material-icons" id="update" (click)="executeUpdate(noteProp)"> create </span>
 </article>

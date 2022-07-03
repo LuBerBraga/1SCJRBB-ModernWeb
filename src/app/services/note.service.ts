@@ -13,6 +13,9 @@ export class NoteService {
   private newNoteSource = new Subject<Note>();
   newNoteProvider = this.newNoteSource.asObservable();
 
+  private updateNoteSource = new Subject<Note>();
+  updateNoteProvider = this.updateNoteSource.asObservable();
+
   constructor(private http: HttpClient) {
     this.apiUrl = "https://fiap-notes-api.herokuapp.com";
   }
@@ -48,6 +51,10 @@ export class NoteService {
     // this.newNoteSource.error("algum exception");
   }
 
+  notifyUpdateNote(note: Note){
+    this.updateNoteSource.next(note);
+  }
+
   getNotes(){
     return this.http.get<Note[]>(`${this.apiUrl}/notes`);
   }
@@ -58,6 +65,10 @@ export class NoteService {
 
   postNotes(textNote: string){
     return this.http.post<Note>(`${this.apiUrl}/notes`, {text: textNote});
+  }
+
+  putNote(noteId: number, novoValorNota: String){
+    return this.http.put<Note>(`${this.apiUrl}/notes/${noteId}`,{text: novoValorNota});
   }
   
 }

@@ -18,8 +18,7 @@ export class ListNotesComponent implements OnInit {
   constructor(private noteService: NoteService) {
     this.subscription = this.noteService.newNoteProvider.subscribe({
       next: (note: Note) => {
-        // this.getApiNotes();
-        this.notes.push(note);
+        this.getApiNotes();
       },
       error: () => {}
     });
